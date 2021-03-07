@@ -212,6 +212,7 @@ drwx------ 2 dale dale 4096 Jan 15 20:15 .ssh
 ```
 This is gold, is telling us that this user is able to run sudo. There is a load of useful things in that .bash_history that I'm going to skip here for now.
 2. I always run sudo -l, always.... Have I said always? always... I think you get it.
+
 ```
 dale@TEAM:~$ sudo -l
 Matching Defaults entries for dale on TEAM:
