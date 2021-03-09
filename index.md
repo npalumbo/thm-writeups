@@ -6,6 +6,12 @@ I joined TryHackMe on Jan 2021, I treat it as a hobby, something I do on weekend
 
 The THM link: https://tryhackme.com/room/teamcw.
 
+### Introduction
+This write up is meant to be read mostly for tryhackme [THM] users. Although I tried to make it as lean and easy to read as I could I realise there is a fair amount of technical jargon and tools used, that might not make sense if you are not a THM user, I hope it is written in a way most tech people would understand.
+During this text I'll be talking about two entities:
+- The attacker box: 10.9.X.X
+- The target box: 10.10.X.X
+
 ### First scouting
 While it sounds reasonable that this box is beginner friendly, it took me around 2 days to root. The first clue is right there in the index page that I completely skipped around a thousand times because it looks exactly like the ubuntu default apache page. One Caveat though the title says:
 ```
