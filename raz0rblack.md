@@ -79,7 +79,7 @@ THM{ab53e05c9a98def00314a14ccbfa8104}
 
 We can see the contents of the spreadsheet in the screen capture below:
 
-![](file:///home/kali/tryhackme/raz0rblack/employee_spreadsheet.png)
+![spreadsheet](https://github.com/npalumbo/thm-writeups/blob/gh-pages/raz0rblack_static/employee_spreadsheet.png)
 
 It's worth noting these 3 users, as we'll see them further down the line:
 
@@ -879,7 +879,7 @@ At line:1 char:15
 As we can see above the contents of the xml file could not be decoded, but the ciphertext looks suspiciously hex encoded. 
 A quick check on cyberchef reveals the root flag!.
 
-![root flag](cyberchef_root_flag.png)
+![root flag](https://github.com/npalumbo/thm-writeups/blob/gh-pages/raz0rblack_static/cyberchef_root_flag.png)
 
 ## Finding Tyson's flag
 
@@ -963,7 +963,7 @@ Info: Download successful!
 
 After downloading the file we can see the following image, which shows a melting chocolate gorilla, telling us how to exit vim, but looks like he didn't have enough time to complete the answer:
 
-![top secret](top_secret.png)
+![top secret](https://github.com/npalumbo/thm-writeups/blob/gh-pages/raz0rblack_static/top_secret.png)
 
 But we know the answer, we can close vim with :wq (:x also works and is shorter, but won't help for this case).
 
