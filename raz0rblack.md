@@ -89,24 +89,59 @@ It's worth noting these 3 users, as we'll see them further down the line:
 ## Probing kerberos
 
 With the previously gathered intelligence, we can craft a file with usernames that we can use to probe kerberos using kerbrute.
+For that we can create an input file called names.txt with the usernames observed above:
 
 ```
-┌──(kali㉿kali)-[~/kerbrute/dist]
-└─$ cat users 
-ljudmila.vetrova
-lvetrova
-dport
-iroyce
-tvidal
-aedwards
-cingram
-ncassidy
-rzaydan
-rdelgado
-twilliams
-sbradley
-clin
+└─$ cat names.txt                                            
+daven port
+imogen royce
+tamara vidal
+arthur edwards
+carl ingram
+nolan cassidy
+reza zaydan
+ljudmila vetrova
+rico delgado
+tyson williams
+steven bradley
+chamber lin
 ```
+And use different combinations of first and last names to craft a list of users
+
+```
+#!/usr/bin/env python
+file1 = open('names.txt', 'r')
+Lines = file1.readlines()
+
+for line in Lines:
+    splitted = line.split()
+    first_name = splitted[0]
+    last_name = splitted[1]
+    print(first_name[0] + "." + last_name)
+    print(first_name + "." + last_name[0])
+    print(first_name + "." + last_name)
+    print(first_name)
+    print(first_name + last_name)
+    print(first_name[0] + last_name)
+
+file1.close()
+```
+
+We can see below an extract of the obtained file:
+```
+┌──(kali㉿kali)-[~/kerbrute/dist]
+└─$ cat users    
+d.port
+daven.p
+daven.port
+daven
+davenport
+dport
+i.royce
+imogen.r
+```
+
+And finally use it on kerbrute
 
 ```
 ┌──(kali㉿kali)-[~/kerbrute/dist]
