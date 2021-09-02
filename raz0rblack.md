@@ -106,7 +106,7 @@ tyson williams
 steven bradley
 chamber lin
 ```
-And use different combinations of first and last names to craft a list of users
+And use different combinations of first and last names to craft a list of users (see combinator.py below)
 
 ```
 #!/usr/bin/env python
@@ -125,6 +125,10 @@ for line in Lines:
     print(first_name[0] + last_name)
 
 file1.close()
+```
+After running our script:
+```
+$ ./combinator.py > users
 ```
 
 We can see below an extract of the obtained file:
