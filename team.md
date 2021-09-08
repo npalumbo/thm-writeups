@@ -1,5 +1,3 @@
-## Team - A beginner friendly boot2root
-
 The THM link: https://tryhackme.com/room/teamcw.
 
 ### Introduction
