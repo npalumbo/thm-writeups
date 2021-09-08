@@ -1,6 +1,4 @@
-# Raz0rblack room
-
-This is my write of TryHackMe's [Raz0rBlack](tryhackme.com/room/raz0rblack) room.
+This is my write-up for TryHackMe's [Raz0rBlack](tryhackme.com/room/raz0rblack) room.
 
 ## Heads up
 
