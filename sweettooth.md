@@ -420,3 +420,7 @@ ls
 cat root.txt
 THM{nY2ZahyF********}
 ```
+
+### Thanks
+
+Thank you for reading this. If you wish to contact me and suggest any amendments or changes, you can reach me out on [linkedin](https://es.linkedin.com/in/nicol%C3%A1s-palumbo-9372615) or [TryHackMe](https://tryhackme.com/p/nicopalumbo).
